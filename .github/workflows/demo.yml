@@ -31,11 +31,16 @@ jobs:
           name: dist-files
           path: |
             dist
-            package.json
           compression-level: 9
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: List dir
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
